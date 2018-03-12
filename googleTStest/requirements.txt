@@ -4,3 +4,4 @@ tensorflow
 pandas
 numpy
 scipy
+ipython==5.2.0
