@@ -57,7 +57,7 @@ def my_input_fn(features, targets, batch_size=1, shuffle=True, num_epochs=None):
     features, labels = ds.make_one_shot_iterator().get_next()
     return features, labels
 
-def train_model(learning_rate, steps, batch_size, input_feature="total_rooms", periods=10):
+def train_model(learning_rate, steps, batch_size, input_feature="total_rooms", periods=1):
   """Trains a linear regression model of one feature.
   
   Args:
@@ -144,7 +144,6 @@ def train_model(learning_rate, steps, batch_size, input_feature="total_rooms", p
   plt.xlabel('Periods')
   plt.title("Root Mean Squared Error vs. Periods")
   plt.tight_layout()
-  print root_mean_squared_errors
   plt.plot(root_mean_squared_errors)
 
   plt.show()

@@ -91,6 +91,7 @@ def render():
 		cmap="coolwarm",
 		c=training_targets["median_house_value"] / training_targets["median_house_value"].max())
     _ = plt.plot()
+    plt.show();
 
 def my_input_fn(features, targets, batch_size=1, shuffle=True, num_epochs=None):
     """Trains a linear regression model of one feature.
@@ -162,7 +163,7 @@ def train_model(
     A `LinearRegressor` object trained on the training data.
   """
 
-  periods = 2
+  periods = 10
   steps_per_period = steps / periods
   
   # Create a linear regressor object.
@@ -187,6 +188,7 @@ def train_model(
       validation_examples, validation_targets["median_house_value"], 
       num_epochs=1, 
       shuffle=False)
+
 
   # Train the model, but do so inside a loop so that we can periodically assess
   # loss metrics.
@@ -218,6 +220,19 @@ def train_model(
     # Add the loss metrics from this period to our list.
     training_rmse.append(training_root_mean_squared_error)
     validation_rmse.append(validation_root_mean_squared_error)
+
+    # render lines
+    # y_extents = np.array([0, training_examples[my_label].max()])
+    
+    # weight = linear_regressor.get_variable_value('linear/linear_model/%s/weights' % input_feature)[0]
+    # bias = linear_regressor.get_variable_value('linear/linear_model/bias_weights')
+
+    # x_extents = (y_extents - bias) / weight
+    # x_extents = np.maximum(np.minimum(x_extents,
+                                      # training_examples[my_feature].max()),
+                           # training_examples[my_feature].min())
+    # y_extents = weight * x_extents + bias
+    # plt.plot(x_extents, y_extents, color=colors[period]) 
   print "Model training finished."
 
   # Output a graph of loss metrics over periods.
